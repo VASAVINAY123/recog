@@ -1,0 +1,51 @@
+{% extends 'user/userbase.html'%}
+{%block contents%}
+
+ <section id="intro">
+
+    <div class="intro-text">
+
+
+
+        <h2 class="tm-text-title">Upload an Image for AI Test </h2>
+                                                <form action="{%url 'ProcessUserImageAI'%}" method="post" enctype="multipart/form-data">
+                                                    {%csrf_token%}
+                                                 <div class="form-group">
+                                                        <input type="file" id="contact_subject" name="file" class="form-control" placeholder="Select an Image"  required/>
+                                                 </div>
+                                                  <div class="form-group">
+                                                      <button type="submit" id="contact_subject" name="Submit" class="btn-get-started scrollto" >Submit</button>
+                                                    </div>
+
+
+                                                </form>
+        <div class="cd-full-width">
+            <table class="table table-bordered">
+    <thead>
+      <tr class="table-danger">
+        <th>S.No</th>
+        <th>File Name</th>
+        <th>Results</th>
+        <th>Date</th>
+        <th>Image</th>
+        <th>Download</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for i in data %}
+     <tr style="color: white; ">
+     <td>{{forloop.counter}}</td>
+     <td>{{i.filename}}</td>
+     <td>{{i.results}}</td>
+     <td>{{i.cdate}}</td>
+     <td><img src="{{i.file}}" width="45" height="40"> </td>
+     <td><a class="btn-link" href="{{ i.file }}" target="_blank">Download</a></td>
+     </tr>
+    {% endfor %}
+
+    </tbody>
+  </table>
+        </div>
+    </div>
+  </section>
+{%endblock%}
